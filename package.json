@@ -1,6 +1,6 @@
 {
     "name": "@darrenkuro/utils",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Personal utility package with neverthrow, pino, radashi, and tempo",
     "type": "module",
     "main": "dist/index.js",
