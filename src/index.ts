@@ -63,7 +63,7 @@ export const logger = pinoLib({
 
 export type Logger = typeof logger;
 
-// Re-export radash - commonly used utilities
+// Re-export radashi - commonly used utilities
 export {
     // Arrays
     alphabetical,
@@ -133,6 +133,7 @@ export {
     title,
     trim,
     // Number
+    clamp,
     inRange,
     toFloat,
     toInt,
@@ -164,7 +165,7 @@ export {
     uid,
     // Series
     series,
-} from 'radash';
+} from 'radashi';
 
 // Re-export tempo - date utilities
 // Note: range -> dateRange, isEqual -> dateIsEqual (avoid radash conflicts)
