@@ -1,73 +1,85 @@
-<h1 align="center">utils</h1>
+<h1 align="center">@darrenkuro/utils</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License"/>
     <img src="https://img.shields.io/badge/status-stable-brightgreen?style=flat-square&logo=git&logoColor=white" alt="Status">
-    <!-- <img src="https://img.shields.io/badge/score-125%2F100-3CB371?style=flat-square&logo=42&logoColor=white" alt="Score"/> -->
-    <!-- <img src="https://img.shields.io/badge/date-May%2026,%202023-ff6984?style=flat-square&logo=Cachet&logoColor=white" alt="Date"/> -->
 </p>
 
-> A short, clear one-liner describing what your project does.
+> Personal utility package bundling neverthrow, pino, radash, and tempo with custom helpers.
 
 ---
 
-## 🚀 Overview
+## Overview
 
-Briefly explain what this project does and why it exists.
+A single import for commonly used utilities across personal TypeScript projects. Re-exports curated subsets of [neverthrow](https://github.com/supermacro/neverthrow), [pino](https://github.com/pinojs/pino), [radash](https://github.com/sodiray/radash), and [@formkit/tempo](https://github.com/formkit/tempo), plus custom utilities for error handling, env validation, notifications, and process management.
 
-## 🧰 Tech Stack: ![C](https://img.shields.io/badge/-C-A8B9CC?style=flat-square&logo=C&logoColor=black) ![Make](https://img.shields.io/badge/-Make-000000?style=flat-square&logo=gnu&logoColor=white)
+## Tech Stack
 
-## 📦 Features
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white) ![tsup](https://img.shields.io/badge/-tsup-000000?style=flat-square&logo=esbuild&logoColor=white)
 
-- Feature 1 – brief explanation
-- Feature 2 – brief explanation
-- Feature 3 – optional line for advanced/unique capability
+## What's Included
+
+### Re-exports
+
+- **neverthrow** — `Result`, `ResultAsync`, `ok`, `err`, `fromPromise`, `safeTry`, etc.
+- **pino** — Logger library + `createLogger` factory with pino-pretty support
+- **radash** — Arrays, async, objects, strings, typed checks, functions, random, series
+- **tempo** — Date creation, formatting, arithmetic, comparison, diff, and timezone utilities
+
+### Custom Utilities
+
+- `createLogger(name, opts?)` — Create a named pino logger with optional pretty printing
+- `logger` — Pre-configured pino-pretty logger for quick use
+- `suppressConsole(fn)` — Suppress console output during synchronous init of an async function
+- `getErrorMessage(error)` — Safely extract error message from unknown error types
+- `sendNotification(title, message)` — macOS Notification Center alert
+- `playSound(sound?)` — Play a macOS system sound
+- `verifyEnvs(keys)` — Validate required env vars, returns `Result<Record, string>`
+- `gracefulShutdown(cleanup)` — Register SIGINT/SIGTERM handlers with cleanup
 
 ---
 
-## 🛠️ Configuration
-
-### Prerequisites
-
-- Compiler for C (e.g. `gcc` or `clang`) and `make`
-
-### Installation & Usage
+## Installation
 
 ```bash
-
+pnpm add @darrenkuro/utils
 ```
 
-### Examples & Demo
+### Usage
 
-```bash
+```ts
+import { ok, err, createLogger, verifyEnvs, gracefulShutdown } from '@darrenkuro/utils';
 
+const log = createLogger('app', { level: 'debug', pretty: true });
+
+const envResult = verifyEnvs(['API_KEY', 'DB_URL'] as const);
+if (envResult.isErr()) {
+    log.error(envResult.error);
+    process.exit(1);
+}
+
+gracefulShutdown(() => log.info('shutting down'));
 ```
 
 ### Development
 
 ```bash
-
+pnpm install        # install dependencies
+pnpm run build      # build with tsup
+pnpm run typecheck  # type check
+pnpm test           # run tests with vitest
+pnpm run release    # bump patch + publish
 ```
 
 ---
 
-## 📝 Notes & Lessons
-
----
-
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🙋‍♂️ Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## 📫 Contact
+## Contact
 
 Darren Kuro – [darren0xa@gmail.com](mailto:darren0xa@gmail.com)
 
