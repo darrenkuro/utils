@@ -74,13 +74,11 @@ Node.js-specific entry point — includes pino, process management, and macOS in
 
 ---
 
-## Installation
+## Usage
 
 ```bash
 pnpm add @darrenkuro/utils
 ```
-
-### Usage
 
 ```ts
 // Universal utilities — works everywhere
@@ -114,12 +112,4 @@ pnpm run release    # bump patch + publish
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Contact
-
-Darren Kuro – [darren0xa@gmail.com](mailto:darren0xa@gmail.com)
-
-GitHub: [@darrenkuro](https://github.com/darrenkuro)
+[MIT](LICENSE) - Darren Kuro
